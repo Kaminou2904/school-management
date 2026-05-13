@@ -20,11 +20,13 @@ const teacherNav: NavItem[] = [
   { href: "/teacher/dashboard", label: "Dashboard", icon: "📊" },
   { href: "/teacher/students", label: "My Students", icon: "🎓" },
   { href: "/teacher/attendance", label: "Attendance", icon: "✅" },
+  { href: "/teacher/assignments", label: "Assignments", icon: "📚" },
 ];
 
 const studentNav: NavItem[] = [
   { href: "/student/dashboard", label: "Dashboard", icon: "📊" },
   { href: "/student/attendance", label: "My Attendance", icon: "📅" },
+  { href: "/student/assignments", label: "Assignments", icon: "📚" },
 ];
 
 const navMap: Record<string, NavItem[]> = {
