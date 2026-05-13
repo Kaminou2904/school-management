@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,9 +26,9 @@ export default function LoginPage() {
       return;
     }
 
-    // Root page reads session server-side and redirects by role
-    router.push("/");
-    router.refresh();
+    // Hard redirect so the browser sends the new session cookie in the next request.
+    // The proxy reads the token and redirects to the correct dashboard by role.
+    window.location.href = "/";
   };
 
   return (

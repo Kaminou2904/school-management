@@ -14,9 +14,15 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // On HTTPS (Vercel/production) next-auth uses __Secure- prefixed cookie name
+  const secureCookie =
+    req.nextUrl.protocol === "https:" ||
+    req.headers.get("x-forwarded-proto") === "https";
+
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
+    secureCookie,
   });
 
   // Unauthenticated: only /login is public
