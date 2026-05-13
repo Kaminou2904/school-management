@@ -13,6 +13,7 @@ const adminNav: NavItem[] = [
   { href: "/admin/branches", label: "Branches", icon: "🏫" },
   { href: "/admin/teachers", label: "Teachers", icon: "👨‍🏫" },
   { href: "/admin/students", label: "Students", icon: "🎓" },
+  { href: "/admin/notices", label: "Notices", icon: "📢" },
 ];
 
 const teacherNav: NavItem[] = [

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import StatsCard from "@/components/StatsCard";
+import NoticesBanner from "@/components/NoticesBanner";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
@@ -25,6 +26,7 @@ export default function TeacherDashboard() {
 
   return (
     <div className="space-y-6">
+      <NoticesBanner />
       <div>
         <h2 className="text-2xl font-bold text-navy">
           Hello, {session?.user?.name?.split(" ")[0]} 👋

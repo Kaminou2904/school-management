@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import StatsCard from "@/components/StatsCard";
+import NoticesBanner from "@/components/NoticesBanner";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -23,6 +24,7 @@ export default function StudentDashboard() {
 
   return (
     <div className="space-y-6">
+      <NoticesBanner />
       <div>
         <h2 className="text-2xl font-bold text-navy">Hello, {user?.name?.split(" ")[0]} 👋</h2>
         <p className="text-gray-400 text-sm mt-1">Welcome to your student portal</p>
