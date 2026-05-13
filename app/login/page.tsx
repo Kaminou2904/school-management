@@ -23,20 +23,14 @@ export default function LoginPage() {
 
     setLoading(false);
 
-    if (result?.error) {
+    if (!result?.ok || result?.error) {
       setError("Invalid email or password. Please try again.");
       return;
     }
 
-    // Fetch session to get role
-    const res = await fetch("/api/auth/session");
-    const session = await res.json();
-    const role = session?.user?.role;
-
-    if (role === "admin") router.push("/admin/dashboard");
-    else if (role === "teacher") router.push("/teacher/dashboard");
-    else if (role === "student") router.push("/student/dashboard");
-    else router.push("/");
+    // Root page reads session server-side and redirects by role
+    router.push("/");
+    router.refresh();
   };
 
   return (

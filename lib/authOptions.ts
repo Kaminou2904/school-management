@@ -14,30 +14,35 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        try {
+          if (!credentials?.email || !credentials?.password) return null;
 
-        await connectDB();
+          await connectDB();
 
-        const user = await User.findOne({
-          email: credentials.email.toLowerCase(),
-          isActive: true,
-        });
+          const user = await User.findOne({
+            email: credentials.email.toLowerCase().trim(),
+            isActive: true,
+          });
 
-        if (!user) return null;
+          if (!user) return null;
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isValid) return null;
+          const isValid = await bcrypt.compare(credentials.password, user.password);
+          if (!isValid) return null;
 
-        const branch = await Branch.findById(user.branch);
+          const branch = await Branch.findById(user.branch);
 
-        return {
-          id: user._id.toString(),
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          branch: user.branch.toString(),
-          branchName: branch?.name ?? "",
-        };
+          return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            branch: user.branch.toString(),
+            branchName: branch?.name ?? "",
+          };
+        } catch (err) {
+          console.error("[NextAuth] authorize error:", err);
+          return null;
+        }
       },
     }),
   ],
